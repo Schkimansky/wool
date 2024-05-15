@@ -1,0 +1,4 @@
+# Do not use
+This is in beta, and is currently not designed for use by anyone.
+This is only for my personal use and allows me to access rust functions inside python.
+I may improve this library to the point where i am confident on whether or not i should release it.

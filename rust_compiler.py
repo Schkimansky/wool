@@ -19,7 +19,7 @@ def get_path_to_dll():
     return path_to_compiled_dll
 
 
-def compile_rust_folder(path = 'rust'):
+def compile_rust_folder(path = 'rust', predll = False):
     path = os.path.abspath(path)
     os.chdir(path)
 
