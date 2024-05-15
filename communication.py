@@ -1,5 +1,4 @@
 from typing import Any
-from rust_compiler import compile_rust_folder
 import ctypes as c
 
 C_TYPES = {'int': c.c_int, 'str': c.c_char_p, int: c.c_int, str: c.c_char_p}
@@ -44,13 +43,13 @@ def make_rust_class(class_name: str, parameters: dict[str, DataType]):
 
     return RustClass
 
-# Tutorial!
-if __name__ == '__main__':
-    dll = compile_rust_folder()
+# # Tutorial!
+# if __name__ == '__main__':
+#     dll = compile_rust_folder()
 
-    Calculator = make_rust_class('Calculator', {'x': int, 'y': int})
+#     Calculator = make_rust_class('Calculator', {'x': int, 'y': int})
 
-    # I dont know whether or not passing strings works currently.
-    calculator = Calculator(2,3)
+#     # I dont know whether or not passing strings works currently.
+#     calculator = Calculator(2,3)
 
-    print("Result:", calculator.add(20))
+#     print("Result:", calculator.add(20))
