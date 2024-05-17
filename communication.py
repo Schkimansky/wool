@@ -5,12 +5,24 @@ C_TYPES = {'int': c.c_int, 'str': c.c_char_p, int: c.c_int, str: c.c_char_p}
 
 class DataType: pass
 
-def load_function(dll, name, arguments=None, return_type=None):
-    func = getattr(dll, name)
+def load_function(function, arguments=None, return_type=None):
+    func = function
     if arguments: func.argtypes = arguments
     if return_type: func.restype = return_type
 
-    return func
+    def funtion_caller(*args, **kwargs):
+        parameter_values = [*args] + [val for key, val in kwargs.items()]
+        
+        processed_values = []
+        for paramval in parameter_values:
+            if type(paramval) == str:
+                processed_values.append(paramval.encode())
+            else:
+                processed_values.append(paramval)
+
+        return func(*processed_values)
+
+    return funtion_caller
 
 def make_rust_class(class_name: str, parameters: dict[str, DataType]):
 
@@ -42,14 +54,3 @@ def make_rust_class(class_name: str, parameters: dict[str, DataType]):
                 return python_func_layer # return a callable function. This function is basically the rust function of the rust class, but automatically gives self AND, can be accessed easily by doing: my_rust_class.rust_method()
 
     return RustClass
-
-# # Tutorial!
-# if __name__ == '__main__':
-#     dll = compile_rust_folder()
-
-#     Calculator = make_rust_class('Calculator', {'x': int, 'y': int})
-
-#     # I dont know whether or not passing strings works currently.
-#     calculator = Calculator(2,3)
-
-#     print("Result:", calculator.add(20))
