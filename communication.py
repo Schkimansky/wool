@@ -14,7 +14,6 @@ def check_array_consists_of_one_type(arr):
             raise ValueError(f"A python list sent to rust must be of the same type, in this array: {arr} the value ({item}) has a different type than the other rest")
         else:
             return start_type # Every item consists of the same type, So just return the type of the first element.
-
 def load_function(function, arguments=None, return_type=None):
     func = function
     if arguments: func.argtypes = arguments
@@ -37,7 +36,7 @@ def load_function(function, arguments=None, return_type=None):
 
     return funtion_caller
 
-def load_rust_class(class_name: str, parameters: dict[str, DataType]):
+def load_class(class_name: str, parameters: dict[str, DataType]):
 
     class RustClass(c.Structure):
         _fields_ = [(key, C_TYPES[val]) for key, val in parameters.items()]

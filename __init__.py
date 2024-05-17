@@ -1,6 +1,6 @@
-__all__ = ['compile_rust_folder', 'load_function', 'make_rust_class']
+__all__ = ['compile_rust_folder', 'load_function', 'load_class']
 
-from .communication import load_function, make_rust_class
+from .communication import load_function, load_class
 from .rust_compiler import compile_rust_folder
 
-_ = compile_rust_folder, load_function, make_rust_class
+_ = compile_rust_folder, load_function, load_class
